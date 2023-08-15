@@ -1,0 +1,19 @@
+.filter {
+    display:grid;
+    grid-template-columns: 400px;
+        margin-top: 150px;
+        
+        font-family: sans-serif;
+        position:fixed ;
+        background-color: rgba(246, 243, 243, 0.906);
+        left:30px;
+        width:28%;
+        top: 8;
+        height: 505px;
+}
+.fieldset {
+    padding: 10px;
+    margin-right : 40px;
+    margin-left: 8px;
+    height: 474px;
+}

@@ -1,0 +1,12 @@
+.create {
+    display :block;
+    width: 100%;
+    align-content: center;
+    padding: 20%;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: row;
+    padding: 10%;
+}

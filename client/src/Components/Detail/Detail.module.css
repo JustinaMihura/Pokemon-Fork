@@ -1,0 +1,28 @@
+.detail {
+    display: flex;
+    flex-direction:row-reverse;
+    height: 100%;
+    width : 100%;
+    background : linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.8)),
+    url("./HD-wallpaper-pokemon-snorlax-pokemon.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 13%;
+    justify-content: space-between;
+    top : 0
+}
+.stat {
+   position: relative;
+   text-align: start;
+   left : 0;
+  padding-right : 7%;
+  padding-left : 150px;
+  margin-top: 0;
+   background: rgba(255, 255, 255, 0.233);
+}
+.img{
+    padding-right : 140px;
+    margin-bottom: 40px;
+    margin-top: 0px;
+}
