@@ -9,7 +9,11 @@ export default function Cards () {
     const pokemons = useSelector(state => state.pokemons);
     const searchName = useSelector(state => state.searchName);
     const filters = useSelector(state => state.filters);
-    
+  
+  console.log(pokemons);
+   
+
+
     const busqueda = searchName;
     
 
@@ -30,11 +34,14 @@ export default function Cards () {
 const renderCards = () => {
     if (busqueda.length >= 1) {
       return  (busqueda.map((ele, index) => {
+        console.log(ele)
+        const tipos = [{name: ele.type}, {name: ele.type2}]
        return  <Card
+          name={ele.name}
           key={index}
           image={ele.image}
-          type={ele.type}
-          type2={ele.type2}
+          Types= {tipos}
+          
         />
     }));
 
@@ -52,9 +59,8 @@ const renderCards = () => {
             key={index}
             image={ele.image}
             name={ele.name}
-            type={ele.type}
-            type2={ele.type2}
-            id={ele.id}
+            idApi={ele.idApi}
+            Types = {ele.Types}
           />
         );
       });

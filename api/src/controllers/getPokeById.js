@@ -3,7 +3,7 @@ const axios = require("axios")
 async function getPokeById (req, res) {
   
     const { idPokemon } = req.params;
-
+  console.log(idPokemon);
     try {
         const { data } = await axios(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`);
         if(data) {

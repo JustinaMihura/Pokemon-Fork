@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import style from "./Card.module.css"
 
 
-export default function Card ({image, name, type , type2, id}) {
+export default function Card ({image, name, idApi, Types}) {
+console.log(Types)
+
+    
 
     return (
             
-        <Link to={`/detail/${id}`}>
+        <Link to={`/detail/${idApi}`}>
         <div className = {style.card}>
             
 
@@ -19,14 +22,10 @@ export default function Card ({image, name, type , type2, id}) {
             ? <h4>{name}</h4>
             : null }
 
-        <ul>Tipos :
-            {type 
-            ? <li>{type}</li> : null }
+            {Types[0] ? <h2>{Types[0].name}</h2> : null}
+            {Types[1] ? <h2>{Types[1].name}</h2> : null}
 
-            {type2
-            ? <li>{type2}</li>
-            : null }   
-        </ul>
+                 
 
         </div>
         </Link>

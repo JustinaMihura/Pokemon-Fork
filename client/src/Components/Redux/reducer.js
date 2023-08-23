@@ -1,10 +1,11 @@
-import { GET_POKES, GET_DETAIL, GET_POKE_NAME, GET_FILTER ,GET_POKE_CREATE, GET_ASC, GET_DESC } from "./actions-types";
+import { GET_POKES, GET_DETAIL, GET_POKE_NAME, GET_FILTER ,GET_POKE_CREATE, GET_ASC, GET_DESC, GET_TYPES } from "./actions-types";
 
 const initialState = {
     pokemons : [],
     detail : {},
     searchName : [],
-    filters : []
+    filters : [],
+    types : []
 };
 
 const reducer = (state = initialState, actions) => {
@@ -12,7 +13,7 @@ const reducer = (state = initialState, actions) => {
 
         case GET_POKES:
            return {...state , pokemons : actions.payload };  
-  //-------------------------------------------------------------------------------------------         
+//-------------------------------------------------------------------------------------------         
         case GET_POKE_NAME :
 
                 if(actions.payload){
@@ -36,8 +37,9 @@ const reducer = (state = initialState, actions) => {
             if(actions.payload) {
 
             var string = actions.payload;
-
-            var filtrado = state.pokemons.filter(ele => ele.type === string || ele.type2 === string)
+           
+            // var filtrado = typesName.filter(ele => ele === string || ele === string)
+            const filtrado = state.pokemons.filter((ele) => ele.Types[0].name === string || (ele.Types[1] && ele.Types[1].name === string ))
             if(filtrado.length > 0)
             return {...state , filters : filtrado}
 
@@ -88,6 +90,9 @@ const reducer = (state = initialState, actions) => {
 
             return {...state, filters : filtradoDesc}
 //----------------------------------------------------------------------------------------
+
+            case GET_TYPES :
+                return {...state , types : actions.payload}
         default:
             return {...state}
     }

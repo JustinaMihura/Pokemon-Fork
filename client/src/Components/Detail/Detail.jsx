@@ -7,7 +7,7 @@ import style from "./Detail.module.css"
 export default function Detail ({setIsLoading}) {
 
     const { idPokemon } = useParams();
-
+  
     const dispatch = useDispatch();
     const details = useSelector(state => state.detail)
 

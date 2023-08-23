@@ -53,8 +53,12 @@ module.exports = (sequelize) => {
     },
     database : {
       type : DataTypes.BOOLEAN,
+    },
+    idApi : {
+      type : DataTypes.INTEGER,
     }
   }, 
+
   {
     timestamps :false
   });

@@ -25,23 +25,25 @@ const {Pokemon} = require("../db");
                 defense : ele.data.stats[2]["base_stat"],
                 speed : ele.data.stats[5]["base_stat"],
                 weight : ele.data.weight,
-                type : ele.data.types[0].type.name,              
-                type2 : ele.data.types[1]?.type.name,
-                id : ele.data.id
+                Types : [ele.data.types[0].type,ele.data.types[1]?.type],
+                idApi : ele.data.id
             };
           });
           
-
+          
             await Promise.all(resultado1.map(async ele => 
-
-            await Pokemon.findOrCreate({where :{name : ele.name, 
+            
+            await Pokemon.findOrCreate({where :{name : ele.name},
+              defaults : { 
               image : ele.image, 
               life : ele.life,
               attackDamage : ele.attackDamage ,
               magicDamage : ele.magicDamage,
               defense : ele.defense, 
               speed : ele.speed, 
-              weight : ele.weight
+              weight : ele.weight,
+              idApi :ele.id,
+          
             }})
             ));
             

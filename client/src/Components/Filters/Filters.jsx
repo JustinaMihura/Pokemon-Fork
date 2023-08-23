@@ -1,10 +1,9 @@
 import React , {useEffect, useState }from "react";
 import axios from "axios";
 import { useDispatch} from "react-redux";
-import { GET_FILTER ,GET_ASC, GET_DESC , GET_POKE_CREATE} from "../Redux/actions-types";
+import { GET_FILTER ,GET_ASC, GET_DESC , GET_POKE_CREATE, GET_TYPES} from "../Redux/actions-types";
 import style from "./Filters.module.css"
 import { Link } from "react-router-dom";
-
 const Filters = () => {
 
 //!--------------------- Estados locales -----------------------------------------------
@@ -54,10 +53,9 @@ const findApi = async () => {
     try {
         const {data} = await axios("http://localhost:3001/find");
         if(data)
+        console.log(data);
         return dispatch({type : GET_POKE_CREATE , payload : data})
-         
-        
-        return console.log("error : no se encontraron pokes creados");      
+               
     
     } catch (error) {
         return console.log(error.message);
@@ -68,25 +66,27 @@ const findApi = async () => {
 //---------------------------------------------------------------------------------------------------------
 //*------------------LLamado a la DB por los tipos al renderizar el DOM--------------------------------------------------
 
-const getSpecificType = async () => {
-
+const getSpecificType =  () => {
+return async (dispatch)  => {
     try {
         const {data} = await axios.get("http://localhost:3001/types");
-        if(data) {
+
+            dispatch({type : GET_TYPES , payload : data})
             setTipos(data)
             return
-        };
+        
 
     } catch (error) {
         return console.log(error.message);
     }
-
+}
 };
 
-useEffect( () => {
-    getSpecificType()
- 
-}, [])
+useEffect(() => {
+    
+        dispatch(getSpecificType())
+    
+},[])
 
 
 

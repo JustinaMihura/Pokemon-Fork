@@ -1,39 +1,66 @@
-const {Pokemon} = require("../db")
-
+const { Pokemon, Types } = require("../db");
 
 async function createPoke(req, res) {
-    const {name , attackDamage , speed , magicDamage , defense, life , weight , image} = req.body;
+  const {
+    name,
+    attackDamage,
+    speed,
+    magicDamage,
+    defense,
+    life,
+    weight,
+    image,
+    type,
+    type2
 
-     if(!name || !attackDamage || !speed || !magicDamage || !defense || !life || !weight || !image) {
-         return res.status(404).json("Faltan datos obligatorios");
-     };
+  } = req.body;
 
-   try {
-        
-        const [pokemon, created] = await Pokemon.findOrCreate({where : {
-                                                            name : name,
-                                                            attackDamage : attackDamage,
-                                                            speed : speed,
-                                                            magicDamage : magicDamage,
-                                                            defense : defense,
-                                                            life : life,
-                                                            weight : weight,
-                                                            image : image,
-                                                            database : true
-                                                        } });
-        
-        if(created) {
-            return res.status(200).json(pokemon);
-        };
-        
-        return res.status(400).json("Ya existe este pokemon")
+  if (
+    !name ||
+    !attackDamage ||
+    !speed ||
+    !magicDamage ||
+    !defense ||
+    !life ||
+    !weight ||
+    !image ||
+    !type 
     
-   } catch (error) {
-    
-    return res.status(500).json({error : error.message})
-   } 
-};
+  ) {
+    return res.status(404).json("Faltan datos obligatorios");
+  }
+
+  try {
+    const [pokemon, created] = await Pokemon.findOrCreate({
+      where: {
+        name: name,
+      },
+      defaults: {
+        attackDamage: attackDamage,
+        speed: speed,
+        magicDamage: magicDamage,
+        defense: defense,
+        life: life,
+        weight: weight,
+        image: image,
+        database: true,
+      }
+
+    });
+
+    if (created) {
+        await Promise.all([pokemon.setTypes(type), pokemon.setTypes(type2)]) 
+      return res.status(200).json(pokemon);
+    }
+
+    return res
+      .status(409)
+      .json({ error: "Ya existe este pokemon", pokemon: pokemon });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
 
 module.exports = {
-    createPoke
-}
+  createPoke,
+};
